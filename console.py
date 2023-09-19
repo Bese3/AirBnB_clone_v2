@@ -111,24 +111,53 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
-        pass
-
-    def do_create(self, args):
-        """ Create an object of any class"""
-        if not args:
+        pass   
+    def do_create(self, arg):
+        """ Create an object with given parameters """
+        if not arg:
             print("** class name missing **")
-        args = args.replace("=", ":")
-        args = args.split(" ")
-        if args[0] not in HBNBCommand.classes:
+            return
+
+        parts = arg.split()
+        class_name = parts[0]
+        params = parts[1:]
+
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args[0]]()
-        for i in args[1:]:
-            i = i.split(":")
-            setattr(new_instance, i[0], i[1].replace("\"", ""))
+
+        new_instance = HBNBCommand.classes[class_name]()
+
+        for param in params:
+            key_value = param.split('=')
+            if len(key_value) != 2:
+                print(f"Skipping invalid parameter: {param}")
+                continue
+
+            key, value = key_value[0], key_value[1]
+
+            key = key.replace("_", " ")
+            
+            if value.startswith('"') and value.endswith('"'):
+                value = value[1:-1].replace('\\"', '"')
+
+            if "." in value:
+                try:
+                    value = float(value)
+                except ValueError:
+                    pass
+            else:
+                try:
+                    value = int(value)
+                except ValueError:
+                    pass
+
+            setattr(new_instance, key, value)
+
         storage.save()
+
         print(new_instance.id)
-        storage.save()
+    
 
     def help_create(self):
         """ Help information for the create method """
@@ -201,24 +230,22 @@ class HBNBCommand(cmd.Cmd):
         print("Destroys an individual instance of a class")
         print("[Usage]: destroy <className> <objectId>\n")
 
-    def do_all(self, args):
-        """ Shows all objects, or all objects of a class"""
-        print_list = []
-
-        if args:
-            args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
-                print("** class doesn't exist **")
-                return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+    def do_all(self, line):
+        """
+        Prints all string representations of all instances
+        based on the class name or class name and ID
+        """
+        args = line.split()
+        if len(args) == 0:
+            print([str(obj) for obj in storage.all().values()])
         else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
+            cls_name = args[0]
+            if cls_name in storage.all():
+                print([str(obj) for obj in storage.all(cls_name).values()])
+            else:
+                print("** class doesn't exist **")
 
-        print(print_list)
-
+    
     def help_all(self):
         """ Help information for the all command """
         print("Shows all objects, or all of a class")

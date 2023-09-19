@@ -63,6 +63,8 @@ class FileStorage:
         if obj is None or obj not in self.__objects.values():
             # print(self.__objects)
             return
-        key = str(obj.__class__.__name__) + "." + str(obj.id)
-        del self.__objects[key]
-        # print(self.__objects[key])
+        for ke, ob in FileStorage.__objects.items():
+            if ob is obj:
+                del FileStorage.__objects[ke]
+                FileStorage.save(obj)
+                break
