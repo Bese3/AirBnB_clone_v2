@@ -27,7 +27,7 @@ def do_pack():
         print("web_static packed: versions/{}\
                -> {}Bytes".format(name,
                                   os.path.getsize(os.getcwd() +
-                                                    '/versions/' + name)))
+                                                  '/versions/' + name)))
     except Exception:
         pass
     return 'versions/' + name
