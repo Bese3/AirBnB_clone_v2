@@ -49,7 +49,7 @@ def do_clean(number=0):
         sudo("mv /data/web_static/shared/* /data/web_static/releases")
     except IndexError:
         if len(names) > 1:
-             sudo("rm -r /data/web_static/releases/*")
+            sudo("rm -r /data/web_static/releases/*")
         sudo("mv /data/web_static/shared/* /data/web_static/releases")
     # print(list_files)
     # print(names[0])
