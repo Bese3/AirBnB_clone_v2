@@ -33,5 +33,22 @@ def c_route(text):
     return "C {}".format(text)
 
 
+@app.route('/python/', strict_slashes=False)
+def python():
+    """
+    The function python() returns the string "Python is cool".
+    """
+    return "Python is cool"
+
+
+@app.route('/python/<text>', strict_slashes=False)
+def python_route(text):
+    """
+    The function `python_route` replaces underscores with spaces
+    in the input text and returns a formatted string."""
+    text = text.replace("_", " ")
+    return "Python {}".format(text)
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
