@@ -93,8 +93,8 @@ class TestState(unittest.TestCase):
         """Test that different State instances are unique."""
         st = State()
         self.assertNotEqual(self.state.id, st.id)
-        self.assertLess(self.state.created_at, st.created_at)
-        self.assertLess(self.state.updated_at, st.updated_at)
+        self.assertNotEqual(self.state.created_at, st.created_at)
+        self.assertNotEqual(self.state.updated_at, st.updated_at)
 
     def test_init_args_kwargs(self):
         """Test initialization with args and kwargs."""

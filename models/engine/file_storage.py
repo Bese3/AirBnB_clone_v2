@@ -68,3 +68,9 @@ class FileStorage:
                 del FileStorage.__objects[ke]
                 FileStorage.save(obj)
                 break
+
+    def close(self):
+        """
+        The close function reloads the current object.
+        """
+        self.reload()

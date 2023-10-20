@@ -18,7 +18,7 @@ from unittest.mock import patch
 import MySQLdb
 
 
-@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'file',
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'fs',
                  'Test DBStorage')
 class test_DBStorage(unittest.TestCase):
     """ Class to test the fidble storage method """

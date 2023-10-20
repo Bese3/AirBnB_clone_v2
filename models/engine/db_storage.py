@@ -51,13 +51,14 @@ class DBStorage:
         class from a database and returns them
         in a dictionary format.
         """
+        # print("all")
         my_dict = {}
-        Session = sessionmaker(bind=self.__engine)
-        self.__session = Session()
+        # Session = sessionmaker(bind=self.__engine)
+        # self.__session = Session()
         if cls:
-            my_query = self.__session.query(eval(cls)).all()
+            my_query = self.__session.query(cls).all()
             for i in my_query:
-                my_dict[str(my_query.__name__) + "." + i.id] = i
+                my_dict[str(i) + "." + i.id] = i
             # print(my_query)
             return my_dict
         for key, value in classes.items():
@@ -69,6 +70,7 @@ class DBStorage:
         return my_dict
 
     def new(self, obj):
+        # print("new")
         """
         The function adds an object to a session.
         """
@@ -94,6 +96,7 @@ class DBStorage:
         in the database and initializes a new
         session.
         """
+        # print("reload")
         from ..amenity import Amenity
         from ..city import City
         from ..place import Place
@@ -101,5 +104,13 @@ class DBStorage:
         from ..state import State
         from ..user import User
         Base.metadata.create_all(self.__engine)
-        self.__session = scoped_session(sessionmaker(bind=self.__engine,
-                                        expire_on_commit=False))()
+        my_session = scoped_session(sessionmaker(bind=self.__engine,
+                                        expire_on_commit=False))
+        self.__session = my_session()
+
+    def close(self):
+        """
+        The close function removes the session and reloads it.
+        """
+        self.__session.close()
+        self.reload()
