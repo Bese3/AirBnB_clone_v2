@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 The `Place` class represents a place to stay
-in the AirBnB project 
+in the AirBnB project
 """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, Float
