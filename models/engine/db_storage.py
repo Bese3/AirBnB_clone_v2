@@ -105,7 +105,7 @@ class DBStorage:
         from ..user import User
         Base.metadata.create_all(self.__engine)
         my_session = scoped_session(sessionmaker(bind=self.__engine,
-                                        expire_on_commit=False))
+                                    expire_on_commit=False))
         self.__session = my_session()
 
     def close(self):
