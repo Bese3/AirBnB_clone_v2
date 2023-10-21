@@ -58,7 +58,7 @@ class DBStorage:
         if cls:
             my_query = self.__session.query(cls).all()
             for i in my_query:
-                my_dict[str(i) + "." + i.id] = i
+                my_dict[str(cls.__name__) + "." + i.id] = i
             # print(my_query)
             return my_dict
         for key, value in classes.items():
