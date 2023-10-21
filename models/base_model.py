@@ -21,7 +21,7 @@ class BaseModel:
     providing common attributes and methods such as
     id, created_at, updated_at, save, to_dict, and delete.
     """
-    id = Column(String(60), primary_key=True)
+    id = Column(String(60), primary_key=True, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 

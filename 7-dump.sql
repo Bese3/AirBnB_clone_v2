@@ -93,3 +93,21 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2017-03-25 19:42:51
+-- CREATE TABLE places (
+--         city_id VARCHAR(60) NOT NULL,
+--         user_id VARCHAR(60) NOT NULL,
+--         name VARCHAR(128) NOT NULL,
+--         description VARCHAR(1024),
+--         number_rooms INTEGER NOT NULL,
+--         number_bathrooms INTEGER NOT NULL,
+--         max_guest INTEGER NOT NULL,
+--         price_by_night INTEGER NOT NULL,
+--         latitude FLOAT,
+--         longitude FLOAT,
+--         id VARCHAR(60) NOT NULL,
+--         created_at DATETIME NOT NULL,
+--         updated_at DATETIME NOT NULL,
+--         PRIMARY KEY (id),
+--         FOREIGN KEY(city_id) REFERENCES cities (id),
+--         FOREIGN KEY(user_id) REFERENCES users (id)
+-- )
