@@ -14,7 +14,7 @@
                     <LI>{{ cities.id }}: <B>{{ cities.name }}</B></LI>
                     {% endfor %}
                 {% else %}
-                    {% for cities in state.cities()|sort(attribute="name") %}
+                    {% for cities in state.cities|sort(attribute="name") %}
                     <LI>{{ cities.id }}: <B>{{ cities.name }}</B></LI>
                     {% endfor %}
                 {% endif %}
