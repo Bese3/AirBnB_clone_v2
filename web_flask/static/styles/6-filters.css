@@ -47,9 +47,8 @@
 	overflow-y: scroll;
 	max-height: 300px;
 
-
-	/* border- : 1px solid #DDDDDD;
-	border-radius: 4px; */
+	position: relative;
+	/* visibility: visible; */
 }
 
 .locations:hover .popover , .amenities:hover .popover {
